@@ -1,23 +1,33 @@
-package com.myname.game.screens.screens;
+package com.myname.game.screens.gameScreen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.myname.game.entitiy.player.Player;
 import com.myname.game.tools.GameCamera;
 import com.myname.game.tools.MapManager;
 
 
 public class GameScreen implements Screen {
 
+    private DrawGameScreen gameScreenDrawer;
+    private RenderGameScreen renderGameScreen;
+
     private MapManager mapManager;
     private GameCamera gameCamera;
+
+    private Player player;
 
     public GameScreen(AssetManager assetManager)
     {
         mapManager = new MapManager(assetManager);
         gameCamera = new GameCamera();
+
+        player = new Player(assetManager);
+
+        gameScreenDrawer = new DrawGameScreen(mapManager,player);
+        renderGameScreen = new RenderGameScreen(mapManager,gameCamera);
     }
 
     @Override
@@ -27,17 +37,14 @@ public class GameScreen implements Screen {
 
     public void draw()
     {
-        mapManager.draw();
+        gameScreenDrawer.drawGameScreen();
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        renderGameScreen.renderGameScreen(delta);
 
-        mapManager.orthogonalTiledMapRenderer.setView(gameCamera.orthographicCamera);
-
-        gameCamera.orthographicCamera.update();
-        draw();
+        this.draw();
     }
 
     @Override

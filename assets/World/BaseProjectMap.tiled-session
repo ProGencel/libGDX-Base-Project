@@ -30,6 +30,7 @@
         "GrassTileset.tsx"
     ],
     "project": "BaseProjectMap.tiled-project",
+    "property.type": "object",
     "recentFiles": [
         "GrassTileset.tsx",
         "world.tmx"
