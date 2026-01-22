@@ -1,18 +1,23 @@
-package com.myname.game.screens.gameScreen;
+package com.myname.game.screens.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.myname.game.screens.gameScreen.tools.CameraManager;
-import com.myname.game.screens.gameScreen.tools.MapManager;
+import com.badlogic.gdx.graphics.GL20;
+import com.myname.game.tools.GameCamera;
+import com.myname.game.tools.MapManager;
+
 
 public class GameScreen implements Screen {
 
-    private CameraManager camManager;
     private MapManager mapManager;
+    private GameCamera gameCamera;
 
     public GameScreen(AssetManager assetManager)
     {
         mapManager = new MapManager(assetManager);
+        gameCamera = new GameCamera();
     }
 
     @Override
@@ -20,14 +25,24 @@ public class GameScreen implements Screen {
 
     }
 
+    public void draw()
+    {
+        mapManager.draw();
+    }
+
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        mapManager.orthogonalTiledMapRenderer.setView(gameCamera.orthographicCamera);
+
+        gameCamera.orthographicCamera.update();
+        draw();
     }
 
     @Override
     public void resize(int width, int height) {
-
+        gameCamera.viewportUpdate(width, height);
     }
 
     @Override
