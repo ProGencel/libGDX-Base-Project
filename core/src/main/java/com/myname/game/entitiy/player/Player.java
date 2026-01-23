@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.myname.game.entitiy.EntityFactory;
 import com.myname.game.entitiy.GameEntity;
 import com.myname.game.interfaces.Drawable;
 
@@ -15,10 +16,10 @@ public class Player extends GameEntity implements Drawable {
 
     private PlayerFactory playerFactory;
 
-    public Player(AssetManager manager, TiledMap tiledMap) {
+    public Player(AssetManager manager, EntityFactory factory) {
         super(manager);
 
-        playerFactory = new PlayerFactory(tiledMap);
+        playerFactory = new PlayerFactory(factory);
 
         texture = manager.get("Player/PlayerIdle.png");
         textureRegion = new TextureRegion(texture);

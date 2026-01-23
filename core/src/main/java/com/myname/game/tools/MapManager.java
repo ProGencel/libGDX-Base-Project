@@ -10,7 +10,7 @@ import com.myname.game.utils.Constants;
 
 public class MapManager implements Drawable, Disposable {
 
-    private TiledMap tiledMap;
+    public TiledMap tiledMap;
     public OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
 
     public MapManager(AssetManager manager)

@@ -106,7 +106,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="EntityReferences" class="Player">
-  <object id="2" name="PlayerStartPosition" x="1632" y="1504">
+  <object id="2" name="PlayerStartPosition" type="Player" x="1632" y="1504">
    <point/>
   </object>
  </objectgroup>

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.myname.game.entitiy.EntityFactory;
 import com.myname.game.entitiy.player.Player;
 import com.myname.game.tools.GameCamera;
 import com.myname.game.tools.MapManager;
@@ -21,6 +22,8 @@ public class GameScreen implements Screen {
 
     private AssetManager assetManager;
 
+    private EntityFactory factory;
+
     public GameScreen(AssetManager assetManager)
     {
         this.assetManager = assetManager;
@@ -28,7 +31,8 @@ public class GameScreen implements Screen {
         mapManager = new MapManager(assetManager);
         gameCamera = new GameCamera();
 
-        player = new Player(assetManager);
+        factory = new EntityFactory(mapManager.tiledMap);
+        player = new Player(assetManager,factory);
 
         gameScreenDrawer = new DrawGameScreen(mapManager,player);
         renderGameScreen = new RenderGameScreen(mapManager,gameCamera);

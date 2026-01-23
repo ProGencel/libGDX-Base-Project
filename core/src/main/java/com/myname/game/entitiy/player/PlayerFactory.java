@@ -3,29 +3,35 @@ package com.myname.game.entitiy.player;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PointMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.myname.game.entitiy.EntityFactory;
 
 public class PlayerFactory {
 
     private float playerBegX;
     private float playerBegY;
 
-    public PlayerFactory(TiledMap tiledMap)
-    {
+    private PointMapObject pointMapObject;
 
+    public PlayerFactory(EntityFactory factory)
+    {
+        setPlayer(factory);
     }
 
-    private PointMapObject findPlayer(TiledMap tiledMap)
+    public void setPlayer(EntityFactory factory)
     {
-        for(MapObject object : tiledMap.getLayers().get("EntityReferences").getObjects().getByType(PointMapObject.class))
+        pointMapObject = (PointMapObject) factory.findEntity("Player","EntityReferences");
+        try
         {
-            String objectType = object.getProperties().get("Class", String.class);
+            playerBegX = pointMapObject.getPoint().x;
+            playerBegY = pointMapObject.getPoint().y;
 
-            if("Player".equals(objectType))
-            {
-                playerBegX = object
-            }
+        }catch (Exception e)
+        {
+            System.out.println("Player cant set \n Error : " +  e);
         }
 
 
+
     }
+
 }
