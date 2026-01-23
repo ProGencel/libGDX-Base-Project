@@ -2,10 +2,10 @@ package com.myname.game.entitiy.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.myname.game.interfaces.Renderable;
+import com.myname.game.interfaces.UpdateAble;
 import com.myname.game.utils.Constants;
 
-public class PlayerInputHandler implements Renderable {
+public class PlayerInputHandler implements UpdateAble {
 
     public PlayerState playerState;
     private Player player;
@@ -17,22 +17,22 @@ public class PlayerInputHandler implements Renderable {
     }
 
     @Override
-    public void render(float dt) {
+    public void update(float dt) {
         if(Gdx.input.isKeyPressed(Input.Keys.W))
         {
-            player.position.y += Constants.PLAYER_SPEED;
+            player.getPosition().y += Constants.PLAYER_SPEED * dt;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S))
         {
-            player.position.y -= Constants.PLAYER_SPEED;
+            player.getPosition().y -= Constants.PLAYER_SPEED * dt;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A))
         {
-            player.position.x -= Constants.PLAYER_SPEED;
+            player.getPosition().x -= Constants.PLAYER_SPEED * dt;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D))
         {
-            player.position.x += Constants.PLAYER_SPEED;
+            player.getPosition().x += Constants.PLAYER_SPEED * dt;
         }
     }
 }

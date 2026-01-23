@@ -11,9 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.myname.game.entitiy.EntityFactory;
 import com.myname.game.entitiy.GameEntity;
 import com.myname.game.interfaces.Drawable;
-import com.myname.game.interfaces.Renderable;
+import com.myname.game.interfaces.UpdateAble;
 
-public class Player extends GameEntity implements Drawable, Renderable {
+public class Player extends GameEntity implements Drawable, UpdateAble {
 
     private Texture texture;
     private TextureRegion textureRegion;
@@ -23,9 +23,17 @@ public class Player extends GameEntity implements Drawable, Renderable {
 
     private PointMapObject playerProps;
 
-    public Vector2 position;
+    private Vector2 position;
     private float width;
     private float height;
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
 
     public Player(AssetManager manager, EntityFactory factory) {
         super(manager);
@@ -58,7 +66,7 @@ public class Player extends GameEntity implements Drawable, Renderable {
     }
 
     @Override
-    public void render(float dt) {
-        inputHandler.render(dt);
+    public void update(float dt) {
+        inputHandler.update(dt);
     }
 }

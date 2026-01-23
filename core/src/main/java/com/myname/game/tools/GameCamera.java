@@ -28,8 +28,8 @@ public class GameCamera {
 
     public void cameraUpdate(Player player)
     {
-        orthographicCamera.position.x = player.position.x;
-        orthographicCamera.position.y = player.position.y;
+        orthographicCamera.position.x = player.getPosition().x;
+        orthographicCamera.position.y = player.getPosition().y;
 
         orthographicCamera.update();
     }

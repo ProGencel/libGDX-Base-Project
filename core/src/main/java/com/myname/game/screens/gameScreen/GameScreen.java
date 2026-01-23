@@ -1,9 +1,7 @@
 package com.myname.game.screens.gameScreen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
 import com.myname.game.entitiy.EntityFactory;
 import com.myname.game.entitiy.player.Player;
 import com.myname.game.tools.GameCamera;
@@ -13,7 +11,7 @@ import com.myname.game.tools.MapManager;
 public class GameScreen implements Screen {
 
     private DrawGameScreen gameScreenDrawer;
-    private RenderGameScreen renderGameScreen;
+    private UpdateGameScreen updateGameScreen;
 
     private MapManager mapManager;
     private GameCamera gameCamera;
@@ -35,7 +33,7 @@ public class GameScreen implements Screen {
         player = new Player(assetManager,factory);
 
         gameScreenDrawer = new DrawGameScreen(mapManager,player,gameCamera);
-        renderGameScreen = new RenderGameScreen(mapManager,gameCamera);
+        updateGameScreen = new UpdateGameScreen(mapManager,gameCamera,player);
     }
 
     @Override
@@ -43,19 +41,14 @@ public class GameScreen implements Screen {
 
     }
 
-    public void draw()
-    {
-        gameScreenDrawer.drawGameScreen();
-    }
-
     @Override
     public void render(float delta) {
-        renderGameScreen.renderGameScreen(delta);
 
-        gameCamera.cameraUpdate(player);
-        player.render(delta);
+        player.update(delta);
 
-        this.draw();
+        updateGameScreen.updateGameScreen(delta);
+
+        gameScreenDrawer.drawGameScreen();
     }
 
     @Override
@@ -82,5 +75,6 @@ public class GameScreen implements Screen {
     public void dispose() {
         assetManager.dispose();
         mapManager.dispose();
+        gameScreenDrawer.dispose();
     }
 }

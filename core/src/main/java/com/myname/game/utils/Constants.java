@@ -8,6 +8,6 @@ public class Constants {
     public static final float PPM = 1/32f;
 
     //Player Variables
-    public static final float PLAYER_SPEED = 0.05f;
+    public static final float PLAYER_SPEED = 5f;
 
 }
